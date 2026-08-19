@@ -228,7 +228,8 @@
     .footer-note {
       padding-left: 26px;
       margin-top: 40px;
-      font-size: 12px;
+      /* Sized to hold one line across the column width. */
+      font-size: max(10px, min(11.8px, calc(3.344vw - 2.21px)));
       font-weight: 500;
       line-height: 110%;
       opacity: 0.5;
