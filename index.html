@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Andrii Pavlov + Solo – Proposal</title>
+  <style>
+    @font-face {
+      font-family: 'Suisse Intl';
+      src: url('fonts/SuisseIntl-Medium.woff') format('woff');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Suisse Intl';
+      src: url('fonts/SuisseIntl-SemiBold.woff') format('woff');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #000;
+      color: #fff;
+      font-family: 'Suisse Intl', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Blur-in animation */
+    @keyframes blurIn {
+      from {
+        opacity: 0;
+        filter: blur(12px);
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+      }
+    }
+
+    .animate-in {
+      opacity: 0;
+      filter: blur(12px);
+      transform: translateY(8px);
+    }
+
+    .animate-in.visible {
+      animation: blurIn 0.7s ease-out forwards;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      gap: 28px;
+      max-width: 422px;
+      margin: 0 auto;
+      padding: 60px 20px 0;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .header-right {
+      margin-left: auto;
+    }
+
+    /* Hero title */
+    .hero-title {
+      max-width: 422px;
+      margin: 0 auto;
+      padding: 35vh 20px 0 37px;
+      font-size: 83.28px;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    /* Timeline */
+    .timeline {
+      max-width: 422px;
+      margin: 60px auto 0;
+      padding: 0 20px 80px;
+      position: relative;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 26px;
+      margin-bottom: 60px;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Numbered circle */
+    .timeline-item .number {
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 17px;
+      height: 17px;
+      border: 1px solid #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8px;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .phase-heading {
+      padding-left: 26px;
+      font-size: min(37px, calc(10.4vw - 6.9px));
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 60px;
+    }
+
+    .phase-heading:not(:first-child) {
+      margin-top: 0;
+    }
+
+    .subtotal {
+      padding-left: 26px;
+      margin-top: 0;
+      margin-bottom: 60px;
+    }
+
+    .subtotal .separator {
+      margin-bottom: 12px;
+    }
+
+    .subtotal-label {
+      font-size: 27px;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      text-align: right;
+      margin-bottom: 12px;
+    }
+
+    .subtotal .pricing {
+      justify-content: flex-end;
+    }
+
+    .timeline-item h2 {
+      font-size: 27px;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: normal;
+      margin-bottom: 12px;
+    }
+
+    .separator {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.3);
+      margin-bottom: 12px;
+    }
+
+    .separator--bold {
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .timeline-item .description {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: normal;
+      opacity: 0.7;
+      margin-bottom: 12px;
+    }
+
+    .pricing {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+    }
+
+    .pricing .duration {
+      opacity: 0.3;
+    }
+
+    .item-note {
+      margin-top: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: normal;
+    }
+
+    /* Total section */
+    .total-section {
+      padding-left: 26px;
+      margin-top: 60px;
+    }
+
+    .total-section .total-label {
+      font-size: min(37px, calc(10.4vw - 6.9px));
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      text-align: right;
+      margin-bottom: 12px;
+    }
+
+    .total-section .pricing {
+      justify-content: flex-end;
+    }
+
+    /* Footer */
+    .footer-note {
+      padding-left: 26px;
+      margin-top: 40px;
+      font-size: 12px;
+      font-weight: 500;
+      opacity: 0.5;
+    }
+
+    /* Animation delays are set dynamically via JS */
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .header {
+        padding-top: 30px;
+        font-size: 9px;
+      }
+
+      .hero-title {
+        font-size: 72px;
+        padding-top: 51vh;
+        padding-left: 35px;
+      }
+
+      .timeline {
+        margin-top: 90px;
+        padding-bottom: 60px;
+      }
+
+      .timeline-item {
+        margin-bottom: 90px;
+      }
+
+      .timeline-item h2 {
+        font-size: 26px;
+      }
+
+      .timeline-item .number {
+        top: 7px;
+      }
+
+      .pricing {
+        font-size: 18px;
+      }
+
+      .subtotal-label {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header animate-in">
+    <span>Andrii Pavlov + Solo</span>
+    <span class="header-right">Brand + App</span>
+  </header>
+
+  <h1 class="hero-title animate-in">Timeline<br>&amp; Cost</h1>
+
+  <main class="timeline">
+
+    <h2 class="phase-heading animate-in">Phase 1:<br>Brand Identity Design</h2>
+
+    <div class="timeline-item animate-in">
+      <div class="number">0</div>
+      <h2>Kick Off</h2>
+      <div class="separator"></div>
+      <p class="description">Online meeting to discuss brand context: strategy, audience, competitors.</p>
+      <div class="separator"></div>
+      <div class="pricing">
+        <span class="duration">1 hour</span>
+      </div>
+    </div>
+
+    <div class="timeline-item animate-in">
+      <div class="number">1</div>
+      <h2>Discovery + Design Strategy</h2>
+      <div class="separator"></div>
+      <p class="description">Analysis of competitors. Search and selection of visual references to address the brand&rsquo;s objectives. Design session to discuss and define the design strategy.</p>
+      <div class="separator"></div>
+      <div class="pricing">
+        <span class="duration">1 week</span>
+      </div>
+    </div>
+
+    <div class="timeline-item animate-in">
+      <div class="number">2</div>
+      <h2>Brand Identity Concept</h2>
+      <div class="separator"></div>
+      <p class="description">Design concept showcasing visual language, logo, colors, layout, animation, interaction, and typography principles. Shown across app, web, and communication formats.</p>
+      <div class="separator"></div>
+      <div class="pricing">
+        <span class="duration">1 week</span>
+      </div>
+    </div>
+
+    <div class="timeline-item animate-in">
+      <div class="number">3</div>
+      <h2>Brand Identity Elements</h2>
+      <div class="separator"></div>
+      <p class="description">Finalisation of the identity regarding a feedback. Design of required identity elements.</p>
+      <div class="separator"></div>
+      <div class="pricing">
+        <span class="duration">1 week</span>
+      </div>
+    </div>
+
+    <div class="timeline-item animate-in">
+      <div class="number">4</div>
+      <h2>Brand Design System +<br>Guidelines</h2>
+      <div class="separator"></div>
+      <p class="description">Brand guidelines and brand design system in Figma.</p>
+      <div class="separator"></div>
+      <div class="pricing">
+        <span class="duration">1 week</span>
+      </div>
+    </div>
+
+    <div class="subtotal animate-in">
+      <div class="separator"></div>
+      <p class="subtotal-label">Subtotal</p>
+      <div class="pricing">
+        <span class="duration">4 weeks</span>
+        <span>$8000</span>
+      </div>
+    </div>
+
+    <h2 class="phase-heading animate-in">Phase 2:<br>App Design</h2>
+
+    <div class="timeline-item animate-in">
+      <div class="number">5</div>
+      <h2>App Design Concept</h2>
+      <div class="separator"></div>
+      <p class="description">Design concept showcasing the app&rsquo;s layout, interaction, typography and color principles. Show on main screens and primary flow.</p>
+      <div class="separator"></div>
+      <div class="pricing">
+        <span class="duration">1 week</span>
+      </div>
+    </div>
+
+    <div class="timeline-item animate-in">
+      <div class="number">6</div>
+      <h2>All Screens &amp; Flows Design</h2>
+      <div class="separator"></div>
+      <p class="description">Design for all screens and flows based on an approved design concept.</p>
+      <div class="separator"></div>
+      <div class="pricing">
+        <span class="duration">2 weeks</span>
+      </div>
+    </div>
+
+    <div class="timeline-item animate-in">
+      <div class="number">7</div>
+      <h2>Design Implementation*</h2>
+      <div class="separator"></div>
+      <p class="description">Implementation of the approved design into the app&rsquo;s code.</p>
+      <div class="separator"></div>
+      <div class="pricing">
+        <span class="duration">2 weeks</span>
+      </div>
+      <p class="item-note">*Can be paralleled with All Screens &amp; Flows Design</p>
+    </div>
+
+    <div class="timeline-item animate-in">
+      <div class="number">8</div>
+      <h2>App Design System</h2>
+      <div class="separator"></div>
+      <p class="description">Design for all screens and flows based on an approved design concept.</p>
+      <div class="separator"></div>
+      <div class="pricing">
+        <span class="duration">1 week</span>
+      </div>
+    </div>
+
+    <div class="subtotal animate-in">
+      <div class="separator"></div>
+      <p class="subtotal-label">Subtotal</p>
+      <div class="pricing">
+        <span class="duration">6 weeks</span>
+        <span>$12000</span>
+      </div>
+    </div>
+
+    <div class="total-section animate-in">
+      <p class="total-label">Total</p>
+      <div class="separator separator--bold"></div>
+      <div class="pricing" style="margin-top: 12px;">
+        <span class="duration">10 weeks</span>
+        <span>$20 000</span>
+      </div>
+    </div>
+
+    <p class="footer-note animate-in">All stages include one round of revisions at no additional charge.</p>
+
+  </main>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      const newlyVisible = entries.filter(e => e.isIntersecting);
+      newlyVisible.forEach((entry, i) => {
+        entry.target.style.animationDelay = (i * 0.15) + 's';
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0 });
+
+    document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
